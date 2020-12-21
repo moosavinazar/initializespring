@@ -6,7 +6,7 @@ import java.time.ZonedDateTime;
 import java.util.*;
 
 @Entity
-@Table("sar_user")
+@Table(name = "sar_user")
 public class User {
 
     @Id
