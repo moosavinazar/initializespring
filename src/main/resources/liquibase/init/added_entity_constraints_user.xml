@@ -1,0 +1,25 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet author="sar soft" id="1608563025549-5">
+        <addUniqueConstraint columnNames="username" constraintName="uk_ep794udbe3xgn3ejuqmplc7ru" tableName="sar_user"/>
+    </changeSet>
+    <changeSet author="sar soft" id="1608563025549-6">
+        <addUniqueConstraint columnNames="cell_phone" constraintName="uk_i2amkldo3vs7w2f22leyfoyiv" tableName="sar_user"/>
+    </changeSet>
+    <changeSet author="sar soft" id="1608563025549-7">
+        <addUniqueConstraint columnNames="email" constraintName="uk_m3oslqdn14h58beme8laeoccf" tableName="sar_user"/>
+    </changeSet>
+
+    <changeSet author="sar soft" id="1608563025549-8">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="sar_user_roles" constraintName="fk91j5gpm0ygwt8nhq8tdso3yif" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="sar_user" validate="true"/>
+    </changeSet>
+    <changeSet author="moosavi (generated)" id="1608563025549-11">
+        <addForeignKeyConstraint baseColumnNames="roles_id" baseTableName="sar_user_roles" constraintName="fkfvx7pimqguvw4dknt4hht9v0t" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="sar_role" validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>

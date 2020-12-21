@@ -1,0 +1,48 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet author="sar soft" id="1608563025549-1">
+        <loadData
+                file="liquibase/init/fake_data/role.csv"
+                separator=";"
+                tableName="sar_role">
+            <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
+        </loadData>
+
+        <loadData
+                file="liquibase/init/fake_data/role_authorities.csv"
+                separator=";"
+                tableName="role_authorities">
+            <column name="role_id" type="numeric"/>
+            <column name="authorities" type="numeric"/>
+        </loadData>
+
+        <loadData
+                file="liquibase/init/fake_data/user.csv"
+                separator=";"
+                tableName="sar_user">
+            <column name="id" type="numeric"/>
+            <column name="username" type="string"/>
+            <column name="password" type="string"/>
+            <column name="email" type="string"/>
+            <column name="cell_phone" type="string"/>
+            <column name="expired" type="datetime"/>
+            <column name="credential" type="boolean"/>
+            <column name="enabled" type="boolean"/>
+            <column name="locked" type="boolean"/>
+        </loadData>
+
+        <loadData
+                file="liquibase/init/fake_data/user_role.csv"
+                separator=";"
+                tableName="sar_user_roles">
+            <column name="user_id" type="numeric"/>
+            <column name="roles_id" type="numeric"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

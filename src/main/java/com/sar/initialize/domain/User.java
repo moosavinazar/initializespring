@@ -10,7 +10,8 @@ import java.util.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @SequenceGenerator(name = "user_generator", sequenceName = "user_seq", initialValue = 5)
     private Long id;
 
     @Column(name = "username", unique = true)
