@@ -3,7 +3,6 @@ package com.sar.initialize.service;
 import com.sar.initialize.domain.Role;
 import com.sar.initialize.repository.RoleRepository;
 import com.sar.initialize.service.dto.RoleDTO;
-import com.sar.initialize.service.dto.UserDTO;
 import com.sar.initialize.service.mapper.RoleMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
