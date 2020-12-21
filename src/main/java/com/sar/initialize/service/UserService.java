@@ -8,15 +8,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class UserService implements ServiceInterface<UserDTO>{
+public class UserService implements UserDetailsService, ServiceInterface<UserDTO>{
 
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -64,5 +69,10 @@ public class UserService implements ServiceInterface<UserDTO>{
     public void delete(Long id) {
         logger.debug("Request to delete User : {}", id);
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return userRepository.findByUsernameOrEmailOrCellPhoneAndEnabledIsTrueAndLockedIsFalseAndExpiredAfter(s, s, s, ZonedDateTime.now().toInstant());
     }
 }

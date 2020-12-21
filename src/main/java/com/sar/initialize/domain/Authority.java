@@ -1,6 +1,8 @@
 package com.sar.initialize.domain;
 
-public enum Authority {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Authority implements GrantedAuthority {
 
     OP_VIEW_USER_LIST,
     OP_VIEW_USER,
@@ -14,4 +16,9 @@ public enum Authority {
     OP_UPDATE_ROLE,
     OP_DELETE_ROLE,
     ;
+
+    @Override
+    public String getAuthority() {
+        return this.name();
+    }
 }

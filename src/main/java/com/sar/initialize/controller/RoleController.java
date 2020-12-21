@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +32,7 @@ public class RoleController implements ControllerInterface<RoleDTO> {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('OP_CREATE_ROLE')")
     public ResponseEntity<RoleDTO> create(RoleDTO roleDTO) throws URISyntaxException {
 
         logger.debug("REST request to save Role : {}", roleDTO);
@@ -51,6 +53,7 @@ public class RoleController implements ControllerInterface<RoleDTO> {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('OP_UPDATE_ROLE')")
     public ResponseEntity<RoleDTO> update(RoleDTO roleDTO) throws URISyntaxException {
 
         logger.info("REST request to update Role : {}", roleDTO);
@@ -70,6 +73,7 @@ public class RoleController implements ControllerInterface<RoleDTO> {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('OP_VIEW_ROLE_LIST')")
     public ResponseEntity<Page<RoleDTO>> getAll(Pageable pageable) {
 
         logger.debug("REST request to get a page of Roles");
@@ -85,6 +89,7 @@ public class RoleController implements ControllerInterface<RoleDTO> {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('OP_VIEW_ROLE')")
     public ResponseEntity<RoleDTO> get(Long id) {
 
         logger.debug("REST request to get Role : {}", id);
@@ -103,6 +108,7 @@ public class RoleController implements ControllerInterface<RoleDTO> {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('OP_DELETE_ROLE')")
     public ResponseEntity<Void> deleteFactor(Long id) {
 
         logger.info("REST request to delete Role : {}", id);

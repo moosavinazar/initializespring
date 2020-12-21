@@ -16,7 +16,7 @@ public class Role {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @ElementCollection(targetClass = Authority.class)
+    @ElementCollection(targetClass = Authority.class, fetch = FetchType.EAGER)
     //@Enumerated(value = EnumType.STRING)
     private Set<Authority> authorities = new HashSet<>();
 

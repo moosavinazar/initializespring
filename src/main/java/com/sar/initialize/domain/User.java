@@ -1,5 +1,8 @@
 package com.sar.initialize.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.time.ZonedDateTime;
@@ -7,7 +10,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "sar_user")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
@@ -72,6 +75,7 @@ public class User {
         this.id = id;
     }
 
+    @Override
     public String getUsername() {
         return null;
     }
@@ -80,6 +84,7 @@ public class User {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return null;
     }
@@ -112,6 +117,7 @@ public class User {
         this.expired = expired;
     }
 
+    @Override
     public boolean isAccountNonExpired() {
         return (expired.isBefore(ZonedDateTime.now().toInstant()));
     }
@@ -124,6 +130,7 @@ public class User {
         this.locked = locked;
     }
 
+    @Override
     public boolean isAccountNonLocked() {
         return isLocked();
     }
@@ -136,10 +143,12 @@ public class User {
         this.credential = credential;
     }
 
+    @Override
     public boolean isCredentialsNonExpired() {
         return isCredential();
     }
 
+    @Override
     public boolean isEnabled() {
         return false;
     }
@@ -154,5 +163,15 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        for (Role role: roles
+             ) {
+            grantedAuthorities.addAll(role.getAuthorities());
+        }
+        return grantedAuthorities;
     }
 }

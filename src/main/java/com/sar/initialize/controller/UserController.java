@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +32,7 @@ public class UserController implements ControllerInterface<UserDTO> {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('OP_CREATE_USER')")
     public ResponseEntity<UserDTO> create(UserDTO userDTO) throws URISyntaxException {
 
         logger.debug("REST request to save User : {}", userDTO);
@@ -51,6 +53,7 @@ public class UserController implements ControllerInterface<UserDTO> {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('OP_UPDATE_USER')")
     public ResponseEntity<UserDTO> update(UserDTO userDTO) throws URISyntaxException {
 
         logger.info("REST request to update User : {}", userDTO);
@@ -70,6 +73,7 @@ public class UserController implements ControllerInterface<UserDTO> {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('OP_VIEW_USER_LIST')")
     public ResponseEntity<Page<UserDTO>> getAll(Pageable pageable) {
 
         logger.debug("REST request to get a page of Users");
@@ -85,6 +89,7 @@ public class UserController implements ControllerInterface<UserDTO> {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('OP_VIEW_USER')")
     public ResponseEntity<UserDTO> get(Long id) {
 
         logger.debug("REST request to get User : {}", id);
@@ -103,6 +108,7 @@ public class UserController implements ControllerInterface<UserDTO> {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('OP_DELETE_USER')")
     public ResponseEntity<Void> deleteFactor(Long id) {
 
         logger.info("REST request to delete User : {}", id);
