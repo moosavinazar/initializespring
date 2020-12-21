@@ -1,5 +1,7 @@
 package com.sar.initialize.service.mapper;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 public interface EntityMapper<DTO, ENTITY> {
