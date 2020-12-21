@@ -18,6 +18,7 @@
         <java.version>11</java.version>
         <mapstruct.version>1.4.1.Final</mapstruct.version>
         <liquibase.version>4.2.2</liquibase.version>
+        <spring.security.oauth2>5.4.2</spring.security.oauth2>
     </properties>
 
     <dependencies>
@@ -67,6 +68,17 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-maven-plugin</artifactId>
             <version>${liquibase.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
+            <version>${spring.security.oauth2}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-client</artifactId>
+            <version>${spring.security.oauth2}</version>
         </dependency>
 
 

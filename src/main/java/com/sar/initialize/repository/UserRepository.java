@@ -10,5 +10,5 @@ import java.time.Instant;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByUsernameOrEmailOrCellPhoneAndEnabledIsTrueAndLockedIsFalseAndExpiredAfter(String userName, String email, String cellPhone, Instant expiredDate);
-
+    User findByEmail(String email);
 }

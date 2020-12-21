@@ -2,6 +2,7 @@ package com.sar.initialize.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -10,7 +11,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "sar_user")
-public class User implements UserDetails {
+public class User implements UserDetails, OAuth2User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
@@ -173,5 +174,15 @@ public class User implements UserDetails {
             grantedAuthorities.addAll(role.getAuthorities());
         }
         return grantedAuthorities;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return new HashMap<>();
     }
 }

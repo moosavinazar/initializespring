@@ -1,5 +1,6 @@
 package com.sar.initialize.config;
 
+import com.sar.initialize.service.OAuth2UserService;
 import com.sar.initialize.service.UserService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,19 +16,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
     private final UserService userService;
+    private final OAuth2UserService oAuth2UserService;
 
     public SecurityConfig(DataSource dataSource,
-                          UserService userService) {
+                          UserService userService,
+                          OAuth2UserService oAuth2UserService) {
         this.dataSource = dataSource;
         this.userService = userService;
+        this.oAuth2UserService = oAuth2UserService;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        /*http.csrf().disable()
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and().formLogin().disable();*/
         http.csrf().disable()
                 .authorizeRequests()
                 .anyRequest().authenticated()
-                .and().formLogin().disable();
+                .and().oauth2Login()
+                .authorizationEndpoint().baseUri("/login/oauth2")
+                .and().redirectionEndpoint().baseUri("/login/callback")
+                .and().userInfoEndpoint().userService(oAuth2UserService)
+                .and().successHandler(new LoginSuccessHandler());
     }
 
     @Override
